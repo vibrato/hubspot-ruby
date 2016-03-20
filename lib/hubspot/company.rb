@@ -12,6 +12,9 @@ module Hubspot
     GET_COMPANY_BY_DOMAIN_PATH        = "/companies/v2/companies/domain/:domain"
     UPDATE_COMPANY_PATH               = "/companies/v2/companies/:company_id"
     ADD_CONTACT_TO_COMPANY_PATH       = "/companies/v2/companies/:company_id/contacts/:vid"
+    DESTROY_CONTACT_TO_COMPANY_PATH   = "/companies/v2/companies/:company_id/contacts/:vid"
+    GET_CONTACTS_IDS_AT_A_COMPANY     = "/companies/v2/companies/:company_id/vids"
+    GET_CONTACTS_AT_A_COMPANY         = "/companies/v2/companies/:company_id/contacts"
     DESTROY_COMPANY_PATH              = "/companies/v2/companies/:company_id"
 
     class << self
@@ -93,6 +96,23 @@ module Hubspot
       @properties[property]
     end
 
+    # Finds a contact of a company
+    # {http://developers.hubspot.com/docs/methods/companies/get_contacts}
+    # @return [Hubspot::Company] Company record
+    def contacts_ids
+      puts "Company #{vid}"
+      response = Hubspot::Connection.get_json(GET_CONTACTS_IDS_AT_A_COMPANY, company_id: vid)
+    end
+
+    # Finds a contact of a company
+    # {http://developers.hubspot.com/docs/methods/companies/get_contacts}
+    # @return [Hubspot::Company] Company record
+    def contacts
+      puts "Company #{vid}"
+      response = Hubspot::Connection.get_json(GET_CONTACTS_AT_A_COMPANY,
+                                                company_id: vid)
+    end
+
     # Updates the properties of a company
     # {http://developers.hubspot.com/docs/methods/companies/update_company}
     # @param params [Hash] hash of properties to update
@@ -120,6 +140,24 @@ module Hubspot
                                      vid: contact_vid,
                                    },
                                    body: nil)
+      self
+    end
+
+    # Remove contact to a company
+    # {http://developers.hubspot.com/docs/methods/companies/remove_contact_from_company}
+    # @param id [Integer] contact id to add
+    # @return [Hubspot::Company] self
+    def remove_contact(contact_or_vid)
+      contact_vid = if contact_or_vid.is_a?(Hubspot::Contact)
+                      contact_or_vid.vid
+                    else
+                      contact_or_vid
+                    end
+      Hubspot::Connection.delete_json(DESTROY_CONTACT_TO_COMPANY_PATH,
+                                   {
+                                     company_id: vid,
+                                     vid: contact_vid,
+                                   })
       self
     end
 
