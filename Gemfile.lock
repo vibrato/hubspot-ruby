@@ -34,7 +34,7 @@ GEM
       git (>= 1.2.5)
       rake
       rdoc
-    json (1.8.1)
+    json (1.8.2)
     listen (2.7.11)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -87,6 +87,7 @@ DEPENDENCIES
   guard-rspec
   httparty (>= 0.10.0)
   jeweler
+  json (= 1.8.2)
   rdoc
   rr
   rspec
@@ -94,3 +95,6 @@ DEPENDENCIES
   timecop
   vcr
   webmock (< 1.10)
+
+BUNDLED WITH
+   1.11.2

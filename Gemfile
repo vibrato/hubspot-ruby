@@ -5,6 +5,7 @@ source "http://rubygems.org"
 
 gem "activesupport", ">=3.0.0"
 gem "httparty", ">=0.10.0"
+gem "json", "1.8.2"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
