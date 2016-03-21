@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Andrew DiMichele"]
-  s.date = "2016-03-20"
+  s.date = "2016-03-21"
   s.description = "hubspot-ruby is a wrapper for the HubSpot REST API"
   s.email = "hello@omadahealth.com"
   s.extra_rdoc_files = [
